@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Title: {{ $project->title }}</h1>
+    <img src="{{ asset('storage/' . $project->image_path) }}" alt="">
     <p><strong>Description: </strong>{{ $project->description }}</p>
     <p><strong>Type: </strong>{{ $project->type->name ?? 'No types specified.' }}</p>
     <p><strong>Technology: </strong>

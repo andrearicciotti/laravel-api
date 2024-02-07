@@ -11,6 +11,7 @@ use App\Models\Skill;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -48,13 +49,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        // dd($request);
         $form_data = $request->validated();
-        // dd($form_data);
+
         $project = new Project;
+        if($request->hasFile('image_path')) {
+            $image_path = Storage::put('project_image', $request->image_path);
+            $project->image_path = $image_path;
+        }
 
         $project->fill($form_data);
-        // dd($project);
         $project->save();
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);

@@ -5,7 +5,7 @@
     <div class="row">
         
         <h1 class="my-4 text-center">New project</h1>
-        <form action="{{ route('admin.projects.store') }}" method="POST">
+        <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
     
             <div class="mb-3 has-validation">
@@ -30,6 +30,15 @@
                     <option value="2">back-end</option>
                     <option value="3">full-stack</option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="image_path" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image_path" name="image_path">
+                {{-- @error('image_path')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror --}}
+            </div>
+
             </div>
             
             <button type="submit" class="btn btn-success">Save</button>
